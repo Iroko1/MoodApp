@@ -4,6 +4,7 @@
 //
 //  Created by VOLKMAR, RANDALL S. on 4/21/25.
 //
+import SwiftUI
 
 enum Mood: String, CaseIterable {
     
@@ -15,6 +16,17 @@ enum Mood: String, CaseIterable {
     case sad = "Sad"
     case angry = "Angry"
     case confused = "Confused"
+    
+    var bgColor: Color {
+        switch self {
+        case .happy: return .yellow
+        case .tired: return .gray
+        case .anxious: return .orange
+        case .sad: return .blue
+        case .angry: return .red
+        case .confused: return .green
+        }
+    }
     
     var emoji: String {
         switch self {

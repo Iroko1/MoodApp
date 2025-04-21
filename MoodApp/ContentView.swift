@@ -7,19 +7,13 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct DashboardView: View {
     var body: some View {
         // first commit test
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        MoodPicker(mood:.angry)
     }
 }
 
 #Preview {
-    ContentView()
+    DashboardView()
 }
