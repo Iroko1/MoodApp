@@ -11,18 +11,19 @@ struct MoodPicker: View {
     let mood: Mood
     var body: some View {
         ZStack {
-            VStack {
-                Text("Select a Mood")
-                LazyVGrid(columns:Array(repeating: GridItem(), count:3)) {
-                    ForEach(mood.allCases) {
-
-                            }
+            ForEach(Mood.allCases, id:\.self) {
+            mood in VStack {
+                    Text(mood.rawValue)
+                    Text(mood.emoji)
+                }.frame(width: 270, height: 100)
+                    .background(Color.blue)
+                    .cornerRadius(20)
+                    .padding(10)
                     }
                 }
             }
         }
-    }
-}
+    
 
 #Preview {
     MoodPicker(mood: .happy)
