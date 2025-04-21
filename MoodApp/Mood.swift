@@ -7,6 +7,8 @@
 
 enum Mood: String, CaseIterable {
     
+    var id: Mood { self }
+    
     case happy = "Happy"
     case tired = "Tired"
     case anxious = "Anxious"
