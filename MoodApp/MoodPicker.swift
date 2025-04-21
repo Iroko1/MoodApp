@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct MoodPicker: View {
+    let mood: Mood
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            VStack {
+                Text("Select a Mood")
+                LazyVGrid(columns:Array(repeating: GridItem(), count:3)) {
+                    ForEach(mood.allCases) {
+
+                            }
+                    }
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    MoodPicker()
+    MoodPicker(mood: .happy)
 }
