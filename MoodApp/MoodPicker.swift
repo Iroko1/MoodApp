@@ -9,22 +9,31 @@
 import SwiftUI
 
 struct MoodPicker: View {
-    let mood: Mood
+    @Binding var mood: Mood
+
     var body: some View {
         ZStack {
             VStack {
-                ForEach(Mood.allCases, id:\.self) {
-                    mood in Text(mood.rawValue)
-                }.frame(width: 270, height: 100)
-                    .background(Color.blue)
-                    .cornerRadius(20)
-                    .padding(10)
+                ForEach(Mood.allCases, id: \.self) { moodOption in
+                    Button(action: {
+                        mood = moodOption
+                    }) {
+                        VStack {
+                            Text(moodOption.emoji)
+                            Text(moodOption.rawValue.capitalized)
+                        }
+                        .frame(width: 270, height: 100)
+                        .background(mood == moodOption ? Color.green : moodOption.bgColor)
+                        .cornerRadius(20)
+                        .padding(10)
+                        .foregroundColor(.white)
                     }
                 }
             }
         }
-    
+    }
+}
 
 #Preview {
-    MoodPicker(mood: .happy)
+    MoodPicker(mood: $Mood)
 }
