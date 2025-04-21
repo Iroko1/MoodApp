@@ -7,13 +7,49 @@
 
 import SwiftUI
 
-struct DashboardView: View {
+import Foundation
+import SwiftUI
+ 
+struct Dashboard: View {
+    
+    @State private var Mood = ""
+    
     var body: some View {
-        // first commit test
-        MoodPicker(mood:.angry)
+        TabView {
+            NavigationStack {
+                VStack {
+                    Text("Today's Mood")
+                        .font(.title)
+                        .padding(.top)
+                    
+                    Text(mood.happy)
+                        .font(.system(size:80))
+                    
+                    Text(Mood.message)
+                        .font(.headline)
+                        .padding()
+                    
+                    NavigationLink("Pick Your Mood", destination: MoodPickerView(mood: $moodSelected))
+                        .padding()
+                }
+                navigationTitle("Dashboard")
+            }
+            .tabItem{
+                Label("Dashboard",systemImage: "face.smiling")
+            }
+            
+            
+            NavigationStack{
+//                AboutView()
+            }
+            .tabItem {
+                Label("About",systemImage: "info.circle")
+            }
+        }
+        
     }
 }
-
+ 
 #Preview {
-    DashboardView()
+    Dashboard(moodSelected: Mood.happy)
 }
