@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct MoodAppApp: App {
+    @StateObject private var moodModel = MoodModel()
+
     var body: some Scene {
         WindowGroup {
-            DashboardView()
+            Dashboard()
+                .environmentObject(moodModel)
         }
     }
 }

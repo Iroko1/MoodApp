@@ -3,17 +3,14 @@
 //  MoodApp
 //
 //  Created by ROTSEVENKOV, MATVEY V. on 4/21/25.
+//  Created by VOLKMAR, RANDALL S. on 4/23/25.
 //
 
 import SwiftUI
 
-import Foundation
-import SwiftUI
- 
 struct Dashboard: View {
-    
-    @State private var Mood = ""
-    
+    @EnvironmentObject var moodModel: MoodModel
+
     var body: some View {
         TabView {
             NavigationStack {
@@ -21,35 +18,35 @@ struct Dashboard: View {
                     Text("Today's Mood")
                         .font(.title)
                         .padding(.top)
-                    
-                    Text(mood.happy)
-                        .font(.system(size:80))
-                    
-                    Text(Mood.message)
+
+                    Text(moodModel.selectedMood.emoji)
+                        .font(.system(size: 80))
+
+                    Text(moodModel.selectedMood.message)
                         .font(.headline)
                         .padding()
-                    
-                    NavigationLink("Pick Your Mood", destination: MoodPickerView(mood: $moodSelected))
+
+                    NavigationLink("Pick Your Mood", destination: MoodPicker())
                         .padding()
                 }
-                navigationTitle("Dashboard")
-            }
-            .tabItem{
-                Label("Dashboard",systemImage: "face.smiling")
-            }
-            
-            
-            NavigationStack{
-//                AboutView()
+                .navigationTitle("Dashboard")
             }
             .tabItem {
-                Label("About",systemImage: "info.circle")
+                Label("Dashboard", systemImage: "face.smiling")
+            }
+
+            NavigationStack {
+                AboutView()
+            }
+            .tabItem {
+                Label("About", systemImage: "info.circle")
             }
         }
-        
     }
 }
- 
+
+
 #Preview {
-    Dashboard(moodSelected: Mood.happy)
+    Dashboard()
+        .environmentObject(MoodModel())
 }
