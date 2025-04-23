@@ -6,9 +6,9 @@
 //
 import SwiftUI
 
-enum Mood: String, CaseIterable {
+enum Mood: String, CaseIterable, Identifiable {
     
-    var id: Mood { self }
+    var id: String { self.rawValue }
     
     case happy = "Happy"
     case tired = "Tired"
@@ -63,4 +63,26 @@ enum Mood: String, CaseIterable {
     }
     
     
+    
+    var about: String {
+           switch self {
+           case .happy:
+               return "Happiness is a positive emotion that often comes from doing things you love or being around people you care about."
+           case .tired:
+               return "Feeling tired can be a signal that your body or mind needs rest. Take it easy and prioritize self-care."
+           case .anxious:
+               return "Anxiety is a common emotion when you're facing something uncertain. Deep breathing and grounding exercises can help."
+           case .sad:
+               return "Sadness is a natural part of life. It's okay to feel down sometimes — expressing your feelings can help."
+           case .angry:
+               return "Anger can arise when things feel unfair or frustrating. Find healthy ways to release it, like talking or exercising."
+           case .confused:
+               return "Confusion often means you're learning or experiencing something new. Take your time — clarity will come."
+           }
+       }
+    
+}
+
+class MoodModel: ObservableObject {
+    @Published var selectedMood: Mood = .happy
 }
