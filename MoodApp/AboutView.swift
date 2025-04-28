@@ -7,29 +7,46 @@
 //
 
 import SwiftUI
- 
+
 struct AboutView: View {
+    @EnvironmentObject var moodModel: MoodModel
+
     var body: some View {
-        VStack(spacing: 20) {
-            Text("About Mood Picker")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding(.top)
-            Text("😌")
-                .font(.system(size: 100))
-            Text("Mood Picker is a simple app that helps you track your mood throughout the day by allowing you to select from a list of moods. It's a simple, colorful way to stay aware of your emotional well-being.")
-                .multilineTextAlignment(.center)
-                .padding()
-            Spacer()
-            Text("Made with care by member 1, member 2, member 4, & Darian Hughes")
-                .font(.footnote)
-                .foregroundColor(.gray)
-                .padding(.bottom)
+        TabView {
+            NavigationStack {
+                VStack {
+                    Text("Today's Mood")
+                        .font(.title)
+                        .padding(.top)
+
+                    Text(moodModel.selectedMood.emoji)
+                        .font(.system(size: 80))
+
+                    Text(moodModel.selectedMood.message)
+                        .font(.headline)
+                        .padding()
+
+                    NavigationLink("Pick Your Mood", destination: MoodPicker())
+                        .padding()
+                }
+                .navigationTitle("Dashboard")
+            }
+            .tabItem {
+                Label("Dashboard", systemImage: "face.smiling")
+            }
+
+            NavigationStack {
+                AboutView()
+            }
+            .tabItem {
+                Label("About", systemImage: "info.circle")
+            }
         }
-        .padding()
     }
 }
- 
+
+
 #Preview {
-    AboutView()
+    Dashboard()
+        .environmentObject(MoodModel())
 }

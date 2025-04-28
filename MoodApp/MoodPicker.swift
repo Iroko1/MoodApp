@@ -4,6 +4,7 @@
 //
 //  Created by DOWNING, AYDEN T. on 4/21/25.
 //  Created by VOLKMAR, RANDALL S. on 4/21/25.
+//  Created by DOWNING, AYDEN T. on 4/21/25.
 //
 
 import SwiftUI
@@ -28,11 +29,17 @@ struct MoodPicker: View {
                         .padding(10)
                         .foregroundColor(.white)
                     }
+                    .frame(width: 300, height: 100)
+                    .background(mood.bgColor)
+                    .cornerRadius(30)
+                    .foregroundColor(.black)
                 }
             }
         }
+        .navigationTitle("Pick Your Mood")
     }
 }
+
 
 #Preview {
     MoodPicker(mood: $Mood)
